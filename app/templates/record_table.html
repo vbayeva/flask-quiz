@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Tablica wyników - Violetta Bayeva{% endblock %}
+
+{% block content %}
+        <div classs="record-container">
+            <table>
+                <thead>
+                  <tr>
+                    <th>Pseudonim</th>
+                    <th>Liczba punktów</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    {% for username, score in usernames_scores %}
+                    <tr>
+                        <td>{{ username }}</td>
+                        <td>{{ score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+{% endblock %}

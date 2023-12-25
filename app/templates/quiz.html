@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Quiz - Violetta Bayeva{% endblock %}
+
+{% block content %}
+        <h1>Chcesz zobaczyć wyniki wszystkich graczy?</h1>
+        <a class="btn btn-primary" href="{{ url_for('main.record_table') }}">Zobacz!</a>
+        <div class="quiz-container">
+            <h2 class="quiz-question">{{question}}</h2>
+            <p><strong>Zdobyłeś sumarycznie {{score}} punktów!</strong></p>
+            <p>Pytanie {{question_number}}/10 {{name}}</p>
+            <form class="quiz-form" method="POST" action="{{ url_for('main.quiz') }}">
+                {{ form.hidden_tag() }}
+                <div class="option">
+                    <ul class="list-unstyled">
+                        {% for subfield in form.options %}
+                            <li>{{ subfield }} {{ subfield.label }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {{ form.submit(class="btn btn-primary btn-lg sub-btn") }}
+            </form>
+        </div>
+        <div class="result-container" style="display:none;">
+            <p>Dzięki! Twój wynik to: <span class="result"></span></p>
+        </div>
+
+        
+{% endblock %}

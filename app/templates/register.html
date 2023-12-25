@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Register - Violetta Bayeva{% endblock %}
+
+{% block content %}
+        <div class="form-container">
+            <h2>Utwórz konto</h2>
+            {% for error in errors %}
+            <p>
+                {{ error }}
+            </p>
+            {% endfor %}
+            <form action="{{ url_for('auth.register')}}" method="POST">
+                <input type="text" id="username" name="username" placeholder="Login" required>
+                <input type="password" id="password" name="password" placeholder="Hasło" required>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Potwierdź hasło" required>
+                <input type="text" id="nickname" name="nickname" placeholder="Pseudonim" required>
+                <button type="submit" class="btn-submit">Zarejestruj</button>
+            </form>
+            <p>Już masz konto? <a href="login.html">Zaloguj</a></p>
+        </div>
+{% endblock %}

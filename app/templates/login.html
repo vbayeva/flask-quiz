@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Zaloguj - Violetta Bayeva{% endblock %}
+
+{% block content %}
+        <div class="form-container">
+            <h2>Zaloguj się do swojego konta</h2>
+            <p>{% if error_message %} {{error_message}} {% endif %}</p>
+            <form action="{{ url_for('auth.login')}}" method="POST">
+                <input type="text" id="login" name="login" placeholder="Login" required>
+                <input type="password" id="password" name="password" placeholder="Hasło" required>
+                <button type="submit" class="btn-submit">Zaloguj</button>
+            </form>
+            <p>Nie masz konta? <a href="register.html">Zarejestruj</a></p>
+        </div>
+{% endblock %}

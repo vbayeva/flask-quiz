@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Wylogowanie - Violetta Bayeva{% endblock %}
+
+{% block content %}
+<div class="logout-container">
+    <h2>Zostałeś/aś wygolowany/a</h2>
+    <p>Dziękuję za odwiedzenie strony. Możesz nadal zobaczyć prognozę pogody!</p>
+    <a href="{{ url_for('main.index') }}" class="btn-logout">Sprawdź prognozę</a>
+</div>
+{% endblock %}
