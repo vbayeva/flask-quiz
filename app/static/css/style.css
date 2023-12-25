@@ -1,0 +1,451 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('../images/background_image.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    color: white;
+}
+
+header {
+    background-color: #6c7ae0;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-nav a, .right-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+}
+
+.right-nav {
+    margin-left: auto;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 50px auto;
+    max-width: 800px; /* Increased width */
+    border-radius: 15px;
+}
+
+.date-info p{
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-end; /* Align children to the right side */
+    text-align: right; /* Align text to the right */
+    /* Keep any other styling you have for .date-info, and add the below */
+    margin-right: 20px; /* Adjust as needed to fit your layout */
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding: 0; /* Removes default padding */
+    line-height: 1.5;
+} 
+
+.weather-search {
+    display: flex; /* This will align children elements in a row */
+    justify-content: center; /* Aligns children to the start of the container */
+    align-items: center; /* Aligns children vertically in the middle */
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px; /* This will space the input and the button */
+    flex-grow: 1; /* This will make the input field grow to fill the space */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6c7ae0;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5a68d8;
+}
+
+.weather-heading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+.weather-info {
+    display: flex;
+    justify-content: space-around; /* Changed from 'center' to 'space-around' */
+    gap: 20px;
+    padding: 10px 0; /* Add padding to increase the container size */
+}
+
+.weather-day {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    min-width: 200px; /* Increased minimum width */
+    text-align: center;
+}
+
+footer {
+    background-color: rgba(242, 242, 242, 0.85);
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .weather-info {
+        flex-direction: column; /* Stack the items vertically */
+    }
+
+    .weather-day {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .record-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+    }
+}
+
+.quiz-background {
+    background: url('../images/quiz_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Existing styles will remain the same */
+
+.quiz-container {
+    background-color: #ffffff; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 600px;
+    position: relative; /* For absolute positioning of elements inside */
+}
+
+.quiz-metadata {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.option {
+    background-color: #f7f7f7; /* Slightly off-white background for options */
+    border: 1px solid #ddd; /* Border for definition */
+    color: #333;
+    border-radius: 5px; /* Rounded corners for the options */
+    padding: 10px;
+    margin-bottom: 10px; /* Space between options */
+}
+
+.btn.btn-primary {
+    width: 100%;
+    background-color: #6c7ae0;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    width: 50%;
+}
+
+/* Style for the submit button */
+.btn.btn-primary.btn-lg.sub-btn {
+    width: 100%;
+    background-color: #6c7ae0;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    margin-top: 20px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.btn.btn-primary.btn-lg.sub-btn:hover {
+    background-color: #5a68d8; /* Slightly lighter on hover */
+}
+
+.result-container {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    display: none; /* Hidden by default, shown after quiz completion */
+}
+
+/* Additional styles for improved aesthetics */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+label.option {
+    display: block; /* Ensure label takes the full width */
+    cursor: pointer; /* Indicates an interactive element */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quiz-container {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+.quiz-question {
+    color: #333;
+}
+
+.question {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+.next-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6c7ae0;
+    color: white;
+    cursor: pointer;
+}
+
+.next-btn:hover {
+    background-color: #5a68d8;
+}
+
+.result-container {
+    color: #ffffff;
+    text-align: center;
+}
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    width: 300px;
+    margin: 50px auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.form-container p {
+    color: #333;
+}
+
+.form-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #6c7ae0;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #5a68d8;
+}
+
+form a {
+    color: #6c7ae0;
+    text-decoration: none;
+}
+
+label {
+    color: #3333
+}
+
+input[type="text"],
+input[type="password"] {
+    color: #333; /* Dark text for visibility */
+    background-color: #fff; /* Light background for the input */
+    /* ... other styles ... */
+}
+
+.h2-logout {
+    color: #333; /* Set to black or a dark shade for visibility */
+    /* Other styles... */
+}
+
+.logout-container {
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.logout-container h2 {
+    color: #333; 
+}
+
+.btn-logout {
+    background-color: #4CAF50; /* A green background for the button */
+    color: white; /* White text on the button */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; /* If the button is an anchor tag */
+    display: inline-block; /* To apply padding and margin */
+    margin-top: 20px;
+}
+
+.btn-logout:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Remove margins and padding from the form options for correct alignment */
+.form-group, .quiz-form {
+    margin: 0;
+    padding: 0;
+}
+
+.list-unstyled {
+    list-style-type: none; /* No bullets */
+    padding: 0; /* No padding */
+    margin: auto; /* No margin */
+    text-align: left; /* Align the text to the left */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack them vertically */
+    align-items: flex-start; /* Align items in the center */
+    width: fit-content;
+}
+
+/* Style for each list item */
+.list-unstyled li {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-start; /* Align radio buttons to the start */
+    width: 100%; /* Full width to center align as a group */
+    margin-bottom: 10px; /* Adds space between options */
+    align-items: center;
+}
+
+/* Style for the radio buttons */
+.list-unstyled input[type="radio"] {
+    margin-top: 0; /* Align with the top of the label */
+    margin-right: 10px; /* Space after the radio button */
+}
+
+/* Style for the labels */
+.list-unstyled label {
+    color: #333;
+    display: block; /* Ensure label takes the full width of the li */
+    width: 100%; /* Full width to take up remaining space */
+}
+
+.user-greeting {
+    display: inline-block;
+    margin-left: 20px;
+    color: #fff; /* White color for visibility */
+    font-weight: bold;
+}
+
+.record-container {
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 20px auto;
+    overflow-x: auto; /* In case the table is wider than the screen */
+    background-color: #fff; /* White background for the content area */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White background for the table */
+}
+
+thead {
+    background-color: #6c7ae0; /* Header background color */
+    color: white; /* Text color for header */
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 15px; /* Padding for cells */
+    border-bottom: 1px solid #dddddd; /* Border for cells */
+}
+
+td {
+    color: #333;
+}
+
+th {
+    font-weight: bold; /* Make header fonts bold */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Zebra striping for rows */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Hover effect for rows */
+}
