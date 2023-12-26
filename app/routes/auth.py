@@ -15,6 +15,7 @@ def login():
 
         user = User.query.filter_by(name=name).first()
 
+        # if there is no such a user or password is incorrect
         if not user or not user.check_password(password):
             return render_template('login.html', error_message = 'Nie udało się zalogować. Spróbuj ponownie')
 
@@ -70,6 +71,7 @@ def register():
     
     return render_template('register.html')
 
+# creates default values for current user
 def create_user_session(user):
     session['user_id'] = user.id
     session['user_nickname'] = user.nickname

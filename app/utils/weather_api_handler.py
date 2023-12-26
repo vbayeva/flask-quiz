@@ -2,6 +2,7 @@ import requests
 
 from .weather_data import WeatherData
 
+# Generates a request to Weather API and provides functions for getting weather data
 class WeatherApiHandler:
     def __init__(self):
         self._current_temperature = 0
@@ -27,19 +28,20 @@ class WeatherApiHandler:
 
         self._current_temperature = response_josn['current']['temp_c']
 
-    def is_ok(self, city_name):
+    # returns information if the request complete
+    def is_request_ok(self, city_name):
         if not self._current_temperature:
             self.__get_weather_data(city_name)
 
         return self._is_request_ok
 
-    def get_current_temperature(self, city_name):
+    def get_current_temperature_in_celsius(self, city_name):
         if not self._current_temperature:
             self.__get_weather_data(city_name)
         
         return self._current_temperature
 
-    def get_weather_forecast(self, city_name):
+    def get_weather_forecast_for_three_days(self, city_name):
         if not self._weather_forecast:
             self.__get_weather_data(city_name)
         
