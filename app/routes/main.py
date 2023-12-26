@@ -115,7 +115,6 @@ def quiz():
     if 'score_in_current_quiz' not in session:
         session['score_in_current_quiz'] = 0
     
-    #TODO function
     if 'questions_left' not in session:
         session['questios_left'] = count_quesions_left(user)
 
@@ -123,7 +122,6 @@ def quiz():
 
     quiz_questions_to_answer = 5
     if question_number > quiz_questions_to_answer:
-        print("question number cleaned")
         session['question_number'] = 1
         return redirect(url_for('main.score'))
 
@@ -158,9 +156,7 @@ def quiz():
 
             record_answer(user.id, question.id)
         
-        print(question_number)
         session['question_number'] = question_number + 1
-        print(session['question_number'])
         session.pop('current_question_id')
         session.modified = True
 

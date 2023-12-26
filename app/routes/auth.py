@@ -14,7 +14,6 @@ def login():
         password = request.form['password']
 
         user = User.query.filter_by(name=name).first()
-        print(user)
 
         if not user or not user.check_password(password):
             return render_template('login.html', error_message = 'Nie udało się zalogować. Spróbuj ponownie')

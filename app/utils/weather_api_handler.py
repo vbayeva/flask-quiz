@@ -16,10 +16,8 @@ class WeatherApiHandler:
         self._is_request_ok = response.ok
 
         if not self._is_request_ok: 
-            print("Not ok")
             return
 
-        print("Ok")
         for i in range(3):
             description = response_josn['forecast']['forecastday'][i]['day']['condition']['text']
             night_temperature = response_josn['forecast']['forecastday'][i]['day']['mintemp_c']
