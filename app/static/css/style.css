@@ -5,17 +5,49 @@ body {
     box-sizing: border-box;
     background: url('../images/background_image.jpg') no-repeat center center fixed; 
     background-size: cover;
-    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: rgb(29, 15, 15);
 }
 
 header {
     background-color: #6c7ae0;
+    width: 100%;
     color: white;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+#page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex-grow: 1;
+}
+
+
+main {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 50px auto;
+    max-width: 800px; 
+    border-radius: 15px;
+    flex-grow: 1;
+}
+
+footer {
+    background-color: rgba(242, 242, 242, 0.85);
+    color: black;
+    text-align: center;
+    padding: 10px 0; 
+    margin-top: auto;
+    width: 100%;
+}
+
 
 .left-nav a, .right-nav a {
     color: white;
@@ -35,41 +67,58 @@ nav a {
     font-size: 1.2em;
 }
 
-main {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    margin: 50px auto;
-    max-width: 800px; /* Increased width */
-    border-radius: 15px;
-}
-
 .date-info p{
-    display: flex; /* Enable flexbox */
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-end; /* Align children to the right side */
-    text-align: right; /* Align text to the right */
-    /* Keep any other styling you have for .date-info, and add the below */
-    margin-right: 20px; /* Adjust as needed to fit your layout */
+    display: flex; 
+    color: white;
+    flex-direction: column;
+    align-items: flex-end; 
+    text-align: right; 
+    margin-right: 20px;
     margin-bottom: 10px;
     margin-top: 0px;
-    padding: 0; /* Removes default padding */
+    padding: 0; 
     line-height: 1.5;
 } 
 
+.weather-day p{
+    color: white;
+}
+
 .weather-search {
-    display: flex; /* This will align children elements in a row */
-    justify-content: center; /* Aligns children to the start of the container */
-    align-items: center; /* Aligns children vertically in the middle */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.weather-search h2 {
+    color: #ff0000; 
+    text-align: center; 
+    margin-bottom: 10px; 
+    width: 100%; 
+}
+
+.weather-search form {
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
 }
 
 input[type="text"] {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    margin-right: 10px; /* This will space the input and the button */
-    flex-grow: 1; /* This will make the input field grow to fill the space */
+    margin-right: 10px; 
+    width: 50%; 
+    height: 10%;
+    max-width: 300px;
 }
 
 button {
@@ -79,6 +128,8 @@ button {
     background-color: #6c7ae0;
     color: white;
     cursor: pointer;
+    height: 10%;
+    min-width: 100px; 
 }
 
 button:hover {
@@ -94,33 +145,22 @@ button:hover {
 
 .weather-info {
     display: flex;
-    justify-content: space-around; /* Changed from 'center' to 'space-around' */
+    justify-content: space-around; 
     gap: 20px;
-    padding: 10px 0; /* Add padding to increase the container size */
+    padding: 10px 0; 
 }
 
 .weather-day {
     background-color: rgba(255, 255, 255, 0.2);
     padding: 15px;
     border-radius: 10px;
-    min-width: 200px; /* Increased minimum width */
+    min-width: 200px;
     text-align: center;
 }
 
-footer {
-    background-color: rgba(242, 242, 242, 0.85);
-    color: black;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .weather-info {
-        flex-direction: column; /* Stack the items vertically */
+        flex-direction: column; 
     }
 
     .weather-day {
@@ -135,26 +175,30 @@ footer {
 
     table {
         display: block;
-        overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+        overflow-x: auto; 
     }
 }
+
+#result_text {
+    color: white;
+}
+
 
 .quiz-background {
     background: url('../images/quiz_background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-/* Existing styles will remain the same */
 
 .quiz-container {
-    background-color: #ffffff; /* Light background for contrast */
-    color: #333; /* Dark text for readability */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #ffffff; 
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
     padding: 20px;
     margin: 30px auto;
     max-width: 600px;
-    position: relative; /* For absolute positioning of elements inside */
+    position: relative; 
 }
 
 .quiz-metadata {
@@ -165,12 +209,12 @@ footer {
 }
 
 .option {
-    background-color: #f7f7f7; /* Slightly off-white background for options */
-    border: 1px solid #ddd; /* Border for definition */
+    background-color: #f7f7f7; 
+    border: 1px solid #ddd; 
     color: #333;
-    border-radius: 5px; /* Rounded corners for the options */
+    border-radius: 5px; 
     padding: 10px;
-    margin-bottom: 10px; /* Space between options */
+    margin-bottom: 10px; 
 }
 
 .btn.btn-primary {
@@ -185,7 +229,6 @@ footer {
     width: 50%;
 }
 
-/* Style for the submit button */
 .btn.btn-primary.btn-lg.sub-btn {
     width: 100%;
     background-color: #6c7ae0;
@@ -199,7 +242,7 @@ footer {
 }
 
 .btn.btn-primary.btn-lg.sub-btn:hover {
-    background-color: #5a68d8; /* Slightly lighter on hover */
+    background-color: #5a68d8; 
 }
 
 .result-container {
@@ -215,20 +258,18 @@ footer {
     width: 100%;
     max-width: 600px;
     text-align: center;
-    display: none; /* Hidden by default, shown after quiz completion */
+    display: none; 
 }
 
-/* Additional styles for improved aesthetics */
 input[type="radio"] {
     margin-right: 10px;
 }
 
 label.option {
-    display: block; /* Ensure label takes the full width */
-    cursor: pointer; /* Indicates an interactive element */
+    display: block; 
+    cursor: pointer; 
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .quiz-container {
         width: 90%;
@@ -317,14 +358,12 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    color: #333; /* Dark text for visibility */
-    background-color: #fff; /* Light background for the input */
-    /* ... other styles ... */
+    color: #333; 
+    background-color: #fff; 
 }
 
 .h2-logout {
-    color: #333; /* Set to black or a dark shade for visibility */
-    /* Other styles... */
+    color: #333; 
 }
 
 .logout-container {
@@ -343,95 +382,96 @@ input[type="password"] {
 }
 
 .btn-logout {
-    background-color: #4CAF50; /* A green background for the button */
-    color: white; /* White text on the button */
+    background-color: #4CAF50;
+    color: white; 
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    text-decoration: none; /* If the button is an anchor tag */
-    display: inline-block; /* To apply padding and margin */
+    text-decoration: none; 
+    display: inline-block; 
     margin-top: 20px;
 }
 
 .btn-logout:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
+    background-color: #45a049; 
 }
 
-/* Remove margins and padding from the form options for correct alignment */
+.score-container h1{
+    color: white;
+}
+
 .form-group, .quiz-form {
     margin: 0;
     padding: 0;
 }
 
 .list-unstyled {
-    list-style-type: none; /* No bullets */
-    padding: 0; /* No padding */
-    margin: auto; /* No margin */
-    text-align: left; /* Align the text to the left */
-    display: flex; /* Flexbox layout */
-    flex-direction: column; /* Stack them vertically */
-    align-items: flex-start; /* Align items in the center */
+    list-style-type: none; 
+    padding: 0; /
+    margin: auto; 
+    text-align: left; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start;
     width: fit-content;
 }
 
-/* Style for each list item */
 .list-unstyled li {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: flex-start; /* Align radio buttons to the start */
-    width: 100%; /* Full width to center align as a group */
-    margin-bottom: 10px; /* Adds space between options */
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
+    margin-bottom: 10px; 
     align-items: center;
 }
 
-/* Style for the radio buttons */
 .list-unstyled input[type="radio"] {
-    margin-top: 0; /* Align with the top of the label */
-    margin-right: 10px; /* Space after the radio button */
+    margin-top: 0; 
+    margin-right: 10px; 
 }
 
-/* Style for the labels */
+
 .list-unstyled label {
     color: #333;
-    display: block; /* Ensure label takes the full width of the li */
-    width: 100%; /* Full width to take up remaining space */
+    display: block; 
+    width: 100%;
 }
 
 .user-greeting {
     display: inline-block;
     margin-left: 20px;
-    color: #fff; /* White color for visibility */
+    color: #fff; 
     font-weight: bold;
 }
 
 .record-container {
     width: 100%;
-    max-width: 600px; /* Adjust as needed */
+    max-width: 600px; 
     margin: 20px auto;
-    overflow-x: auto; /* In case the table is wider than the screen */
-    background-color: #fff; /* White background for the content area */
+    overflow-x: auto; 
+    background-color: #fff; 
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Collapse borders */
+    border-collapse: collapse; 
     margin: 0;
     padding: 0;
-    background-color: #ffffff; /* White background for the table */
+    background-color: #ffffff; 
 }
 
 thead {
-    background-color: #6c7ae0; /* Header background color */
-    color: white; /* Text color for header */
+    background-color: #6c7ae0; 
+    color: white; 
 }
 
 th, td {
     text-align: left;
-    padding: 12px 15px; /* Padding for cells */
-    border-bottom: 1px solid #dddddd; /* Border for cells */
+    padding: 12px 15px; 
+    border-bottom: 1px solid #dddddd; 
 }
 
 td {
@@ -439,13 +479,13 @@ td {
 }
 
 th {
-    font-weight: bold; /* Make header fonts bold */
+    font-weight: bold; 
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #f9f9f9; /* Zebra striping for rows */
+    background-color: #f9f9f9; 
 }
 
 tbody tr:hover {
-    background-color: #f1f1f1; /* Hover effect for rows */
+    background-color: #f1f1f1; 
 }

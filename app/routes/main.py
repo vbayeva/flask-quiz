@@ -1,5 +1,6 @@
 from calendar import weekday
 from os import name
+from turtle import st
 from click import option
 from flask import Blueprint, redirect, render_template, request, session, g, url_for
 from flask_login import current_user
@@ -26,9 +27,22 @@ def record_answer(user_id, question_id):
 
 @main.before_request
 def before_request():
-    if request.endpoint != 'main.quiz' or request.endpoint != 'main.score':
+    if not current_user.is_authenticated:
+        return
+
+    if request.endpoint != 'main.quiz' and request.endpoint != 'main.score':
         session['question_number'] = 1
         session['score_in_current_quiz'] = 0
+
+    # unmark all asked questions in this session
+    # correctly answered questions are already marked in database
+    if request.endpoint != 'main.quiz':
+        clear_asked_questions()
+        session['questions_left'] = count_quesions_left(get_current_user())
+
+def clear_asked_questions():
+    for question in Questions.query:
+        session[str(question.id)] = 0
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -46,6 +60,15 @@ def index():
             )
 
         weather_api_handler = WeatherApiHandler()
+
+        if not weather_api_handler.is_ok(city_name):
+            return render_template(
+                'home.html',
+                today_date = today_date,
+                day_of_the_week = weekday_name,
+                error_message = 'Nieprawidłowa nazwa miasta. Używaj tylko litery alfabetu łacińskiego'
+        )
+
         weather_forecast = weather_api_handler.get_weather_forecast(city_name)
         current_temperature = weather_api_handler.get_current_temperature(city_name)
 
@@ -67,7 +90,7 @@ def index():
 
 @main.route('/record_table')
 def record_table():
-    users = User.query.with_entities(User.nickname, User.main_score).all()
+    users = User.query.with_entities(User.nickname, User.main_score).order_by(desc(User.main_score)).all()
 
     return render_template('record_table.html', usernames_scores=users)
 
@@ -75,7 +98,10 @@ def record_table():
 def score():
     score = session['score_in_current_quiz']
     session['score_in_current_quiz'] = 0
-    return render_template('score.html', current_score = score)
+
+    is_any_questions_left = count_quesions_left(get_current_user()) != 0
+
+    return render_template('score.html', current_score = score, is_any_questions_left=is_any_questions_left)
 
 
 
@@ -84,34 +110,44 @@ def quiz():
     if not current_user.is_authenticated:
         return redirect(url_for('auth.login'))
     
+    user = get_current_user()
+
     if 'score_in_current_quiz' not in session:
         session['score_in_current_quiz'] = 0
+    
+    #TODO function
+    if 'questions_left' not in session:
+        session['questios_left'] = count_quesions_left(user)
 
     question_number = session.get('question_number', 1)
 
-    if question_number > 10:
+    quiz_questions_to_answer = 5
+    if question_number > quiz_questions_to_answer:
+        print("question number cleaned")
         session['question_number'] = 1
-        #TODO: clean asked questions
         return redirect(url_for('main.score'))
 
-    user = User.query.filter_by(id=session['user_id']).first()
+    if session['questions_left'] == 0:
+        clear_asked_questions()
 
     question = None
     if 'current_question_id' in session:
         question = Questions.query.filter_by(id=session['current_question_id']).first()
     else:
         question = get_new_question_for_user(user.id)
+
+        if not question:
+            return redirect(url_for('main.score'))
+
+        while str(question.id) in session and session[str(question.id)] == 1:
+            question = get_new_question_for_user(user.id)
+
+        # mark question as asked for this quiz
+        session[str(question.id)] = 1
+        session['questions_left'] -= 1
         session['current_question_id'] = question.id    
 
-    if not question:
-        return redirect(url_for('main.index'))
-
     form = QuestionForm()
-    #TODO not asked
-
-    #while session[question.id]:
-    #    question = Questions.query.order_by(func.random()).first()
-    #session[question.id] = 1
     
     if request.method == 'POST':
         option = request.form['options']
@@ -122,7 +158,9 @@ def quiz():
 
             record_answer(user.id, question.id)
         
+        print(question_number)
         session['question_number'] = question_number + 1
+        print(session['question_number'])
         session.pop('current_question_id')
         session.modified = True
 
@@ -140,8 +178,15 @@ def quiz():
         form = form, 
         question = question.question,
         score = user.main_score,
-        question_number = question_number
+        question_number = question_number,
+        sum_question = quiz_questions_to_answer
     )
+
+def get_current_user():
+    return User.query.filter_by(id=session['user_id']).first()
+
+def count_quesions_left(user):
+    return Questions.query.count() - user.main_score
 
 @main.route('/create_question', methods=['GET', 'POST'])
 def create_question():

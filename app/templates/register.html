@@ -16,6 +16,6 @@
                 <input type="text" id="nickname" name="nickname" placeholder="Pseudonim" required>
                 <button type="submit" class="btn-submit">Zarejestruj</button>
             </form>
-            <p>Już masz konto? <a href="login.html">Zaloguj</a></p>
+            <p>Już masz konto? <a href="{{ url_for('auth.login')}}">Zaloguj</a></p>
         </div>
 {% endblock %}

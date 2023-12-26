@@ -3,19 +3,24 @@
 
 {% block content %}
         <div class="date-info">
-            <p id="current-date">Data: {{today_date}}</p>
-            <p id="day-name">Dzień tygodnia: {{day_of_the_week}}</p>
+            <p>Data: {{today_date}}</p>
+            <p>Dzień tygodnia: {{day_of_the_week}}</p>
         </div>
         <div class="weather-search">
             <form action="{{ url_for('main.index')}}" method="POST">
-                <input type="text" name='city_name' id="city-name" placeholder="Wpisz nazwę miasta">
-                <button type="submit" class="button">Pokaż pogodę</button>
+                {% if error_message %}
+                    <h2>{{ error_message }}</h2>
+                {% endif %}
+                <div class="input-group">
+                    <input type="text" name='city_name' placeholder="Wpisz nazwę miasta">
+                    <button type="submit" class="button">Pokaż pogodę</button>
+                </div>
             </form>
         </div>
-        <div class="weather-section">
+        <div>
             <h3 class="weather-heading">Prognoza pogody</h3>
             {% if current_temperature %}
-            <h2 class="temperature_now">Teraz: {{current_temperature}}</h2>
+            <h3 class="weather-heading">Teraz: {{current_temperature}} stopni</h2>
             {% endif %}
             <div class="weather-info">
                 <div class="weather-day">

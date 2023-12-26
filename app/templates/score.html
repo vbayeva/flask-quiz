@@ -2,6 +2,14 @@
 {% block title %}Quiz - Violetta Bayeva{% endblock %}
 
 {% block content %}
-        <h1>Gratulacje!</h1>
-        <h1>Twój wynik w tym quizie: {{ current_score }}</h1>
+        <div class="score-container">
+                <h1>Gratulacje!</h1>
+                
+                {% if not is_any_questions_left %}
+                        <h1>Skończyły się pytania. Odpowiedziałeś/aś na wszystkie prawidłowo. Dobra robota!</h1>
+                {% else %}
+                        <h1>Twój wynik w tym quizie: {{ current_score }}</h1>
+                {% endif %}
+        </div>  
+        
 {% endblock %}
